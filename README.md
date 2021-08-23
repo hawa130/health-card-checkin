@@ -15,7 +15,8 @@
 
 ---
 
-1. 安装依赖
+### 安装依赖
+
 安装 [puppeteer](https://github.com/puppeteer/puppeteer)。
 ```
 npm i puppeteer
@@ -24,7 +25,8 @@ npm i puppeteer
 
 ---
 
-2. 修改脚本配置
+### 修改脚本配置
+
 ```javascript
 const username = '你的学号';
 const password = '你的密码';
@@ -63,7 +65,8 @@ const browser = await puppeteer.launch({
 
 ---
 
-3. 运行脚本
+### 运行脚本
+
 ```
 node yqt-check.js
 ```
