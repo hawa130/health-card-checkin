@@ -1,0 +1,15 @@
+{
+  "name": "yiqingtong",
+  "version": "1.0.0",
+  "description": "",
+  "main": "yqt-check.js",
+  "scripts": {
+    "start": "node yqt-check.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^10.2.0"
+  }
+}
