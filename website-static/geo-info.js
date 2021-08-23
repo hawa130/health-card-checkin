@@ -22,21 +22,23 @@ function getLocation() {
     AMap.event.addListener(geolocation, 'error', locateError);      //返回定位出错信息
   });
 }
-// 定位成功
-function locateComplete(res) {
+
+function located(res) {
   document.querySelector('.geo-info-container').className = 'geo-info-container';
   document.querySelector('.copy').className = 'copy btn btn-outline-secondary';
-  let button = document.querySelector('.get-info');
-  button.innerHTML = '获取成功';
-  button.className = 'get-info btn btn-success';
   let data = JSON.stringify(res, null, '    ');
   let hignlightedData = hljs.highlight(data, {language: 'json'}).value;
   document.querySelector('.geo-info').innerHTML = hignlightedData;
 }
+// 定位成功
+function locateComplete(res) {
+  let button = document.querySelector('.get-info');
+  button.innerHTML = '获取成功';
+  button.className = 'get-info btn btn-success';
+  located(res);
+}
 // 定位失败
 function locateError(res) {
-  document.querySelector('.geo-info-container').className = 'geo-info-container';
-  document.querySelector('.copy').className = 'copy btn btn-outline-secondary';
   let button = document.querySelector('.get-info');
   button.innerHTML = '获取失败';
   button.className = 'get-info btn btn-danger';
@@ -45,9 +47,7 @@ function locateError(res) {
     button.innerHTML = '获取定位信息';
     button.className = 'get-info btn btn-primary';
   }, 3000);
-  let data = JSON.stringify(res, null, '    ');
-  let hignlightedData = hljs.highlight(data, {language: 'json'}).value;
-  document.querySelector('.geo-info').innerHTML = hignlightedData;
+  located(res);
 }
 // 点击复制
 function onCopy() {
