@@ -5,6 +5,7 @@
     <title>获取定位</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap-icons/1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.2.0/styles/atom-one-light.min.css">
     <script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/11.2.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=729923f88542d91590470f613adb27b5&plugin=AMap.Driving"></script>
@@ -12,6 +13,9 @@
     <style>
         button {
             margin: 1.25rem 1rem 1.25rem 0;
+        }
+        i {
+            margin-right: .5rem;
         }
         .geo-info-container {
             padding: 1rem;
@@ -30,8 +34,12 @@
 </head>
 <body>
     <div class="container">
-        <button onclick="getLocation()" class="get-info btn btn-primary">获取定位信息</button>
-        <button onclick="onCopy()" class="copy btn btn-outline-secondary hidden">复制</button>
+        <button onclick="getLocation()" class="get-info btn btn-primary">
+            <i class="bi bi-geo-alt" style="margin-right: .5rem"></i>获取定位信息
+        </button>
+        <button onclick="onCopy()" class="copy btn btn-outline-secondary hidden">
+            <i class="bi bi-clipboard" style="margin-right: .5rem"></i>复制
+        </button>
         <div class="geo-info-container hidden">
             <pre class="geo-info"></pre>
         </div>

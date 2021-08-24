@@ -15,7 +15,7 @@ function getLocation() {
     });
     mapObj.addControl(geolocation);
     let button = document.querySelector('.get-info');
-    button.innerHTML = '定位中...';
+    button.innerHTML = '<i class="bi bi-arrow-repeat"></i>定位中...';
     button.disabled = true;
     geolocation.getCurrentPosition();
     AMap.event.addListener(geolocation, 'complete', locateComplete);//返回定位信息
@@ -33,18 +33,18 @@ function located(res) {
 // 定位成功
 function locateComplete(res) {
   let button = document.querySelector('.get-info');
-  button.innerHTML = '获取成功';
+  button.innerHTML = '<i class="bi bi-check-circle"></i>获取成功';
   button.className = 'get-info btn btn-success';
   located(res);
 }
 // 定位失败
 function locateError(res) {
   let button = document.querySelector('.get-info');
-  button.innerHTML = '获取失败';
+  button.innerHTML = '<i class="bi bi-x-circle"></i>获取失败';
   button.className = 'get-info btn btn-danger';
   button.disabled = false;
   setTimeout(function () {
-    button.innerHTML = '获取定位信息';
+    button.innerHTML = '<i class="bi bi-geo-alt"></i>获取定位信息';
     button.className = 'get-info btn btn-primary';
   }, 3000);
   located(res);
@@ -55,20 +55,20 @@ function onCopy() {
   navigator.clipboard.writeText(data)
     .then(function () {
       let button = document.querySelector('.copy');
-      button.innerHTML = '复制成功';
+      button.innerHTML = '<i class="bi bi-check-circle"></i>复制成功';
       button.className = 'copy btn btn-outline-success';
       button.disabled = true;
       setTimeout(function () {
-        button.innerHTML = '复制';
+        button.innerHTML = '<i class="bi bi-clipboard"></i>复制';
         button.className = 'copy btn btn-outline-secondary';
         button.disabled = false;
       }, 3000);
     }, function () {
       let button = document.querySelector('.copy');
-      button.innerHTML = '复制失败';
+      button.innerHTML = '<i class="bi bi-x-circle"></i>复制失败';
       button.className = 'copy btn btn-outline-danger';
       setTimeout(function () {
-        button.innerHTML = '复制';
+        button.innerHTML = '<i class="bi bi-clipboard"></i>复制';
         button.className = 'copy btn btn-outline-secondary';
       }, 3000);
     })
