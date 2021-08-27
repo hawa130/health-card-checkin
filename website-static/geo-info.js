@@ -35,6 +35,10 @@ function locateComplete(res) {
   let button = document.querySelector('.get-info');
   button.innerHTML = '<i class="bi bi-check-circle"></i>获取成功';
   button.className = 'get-info btn btn-success';
+  setTimeout(function () {
+    button.innerHTML = '<i class="bi bi-geo-alt"></i>重新获取';
+    button.className = 'get-info btn btn-primary';
+  }, 10000);
   located(res);
 }
 // 定位失败
@@ -44,7 +48,7 @@ function locateError(res) {
   button.className = 'get-info btn btn-danger';
   button.disabled = false;
   setTimeout(function () {
-    button.innerHTML = '<i class="bi bi-geo-alt"></i>获取定位信息';
+    button.innerHTML = '<i class="bi bi-geo-alt"></i>重新获取';
     button.className = 'get-info btn btn-primary';
   }, 3000);
   located(res);
