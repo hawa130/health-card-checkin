@@ -13,6 +13,8 @@
 ## 部署
 该脚本执行需要 [node.js](https://nodejs.org/) 环境。请先确保个人电脑或服务器上安装了 node.js。
 
+以下命令如无特别注明，则均在项目文件夹里执行。
+
 ---
 
 ### 安装依赖
@@ -77,5 +79,11 @@ node yqt-check.js
 
 Linux 系统可能会因为或多或少的库缺失无法运行。启动时如果有缺失的库会报错，以及缺失库的名字。一般缺哪个装哪个就好了。
 
+## 关于定位获取网站
+该网站是托管于 GitHub Pages 的纯静态网站，不会收集任何信息。所使用的 API 是从健康卡打卡网页扒的 API，保证获取数据的可用性。
+
+网站源代码也在项目里，即 [index.html](https://github.com/hawa130/health-card-checkin/blob/master/index.html) 。如果网站挂了或者域名到期了，可以在本地部署使用。
+
 ## 附录
 [puppeteer 常见问题](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#troubleshooting)
+
