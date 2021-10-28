@@ -1,3 +1,5 @@
+let rawData;
+
 // 获取定位信息
 function getLocation() {
   let mapObj = new AMap.Map('iCenter');
@@ -26,7 +28,9 @@ function getLocation() {
 function located(res) {
   document.querySelector('.geo-info-container').className = 'geo-info-container';
   document.querySelector('.copy').className = 'copy btn btn-outline-secondary';
+  document.querySelector('.copy-raw').className = 'copy-raw btn btn-outline-primary';
   let data = JSON.stringify(res, null, '    ');
+  rawData = JSON.stringify(res);
   let hignlightedData = hljs.highlight(data, {language: 'json'}).value;
   document.querySelector('.geo-info').innerHTML = hignlightedData;
 }
@@ -38,6 +42,7 @@ function locateComplete(res) {
   setTimeout(function () {
     button.innerHTML = '<i class="bi bi-geo-alt"></i>重新获取';
     button.className = 'get-info btn btn-primary';
+    button.disabled = false;
   }, 10000);
   located(res);
 }
@@ -63,7 +68,7 @@ function onCopy() {
       button.className = 'copy btn btn-outline-success';
       button.disabled = true;
       setTimeout(function () {
-        button.innerHTML = '<i class="bi bi-clipboard"></i>复制';
+        button.innerHTML = '<i class="bi bi-clipboard"></i>复制可视化数据';
         button.className = 'copy btn btn-outline-secondary';
         button.disabled = false;
       }, 3000);
@@ -72,8 +77,32 @@ function onCopy() {
       button.innerHTML = '<i class="bi bi-x-circle"></i>复制失败';
       button.className = 'copy btn btn-outline-danger';
       setTimeout(function () {
-        button.innerHTML = '<i class="bi bi-clipboard"></i>复制';
+        button.innerHTML = '<i class="bi bi-clipboard"></i>复制可视化数据';
         button.className = 'copy btn btn-outline-secondary';
+      }, 3000);
+    })
+}
+// 点击复制源
+function onCopyRaw() {
+  const data = rawData;
+  navigator.clipboard.writeText(data)
+    .then(function () {
+      let button = document.querySelector('.copy-raw');
+      button.innerHTML = '<i class="bi bi-check-circle"></i>复制成功';
+      button.className = 'copy-raw btn btn-outline-success';
+      button.disabled = true;
+      setTimeout(function () {
+        button.innerHTML = '<i class="bi bi-clipboard"></i>复制打卡用数据';
+        button.className = 'copy-raw btn btn-outline-primary';
+        button.disabled = false;
+      }, 3000);
+    }, function () {
+      let button = document.querySelector('.copy-raw');
+      button.innerHTML = '<i class="bi bi-x-circle"></i>复制失败';
+      button.className = 'copy-raw btn btn-outline-danger';
+      setTimeout(function () {
+        button.innerHTML = '<i class="bi bi-clipboard"></i>复制打卡用数据';
+        button.className = 'copy-raw btn btn-outline-primary';
       }, 3000);
     })
 }

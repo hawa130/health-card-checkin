@@ -12,12 +12,13 @@
     <script type="text/javascript" src="website-static/geo-info.js"></script>
     <style>
         button {
-            margin: 1.25rem 1rem 1.25rem 0;
+            margin: 1.25rem 1rem 0 0;
         }
         i {
             margin-right: .5rem;
         }
         .geo-info-container {
+            margin-top: 1.25rem;
             padding: 1rem;
             border-radius: .25rem;
             background-color: #f8f9fa;
@@ -37,8 +38,11 @@
         <button onclick="getLocation()" class="get-info btn btn-primary">
             <i class="bi bi-geo-alt" style="margin-right: .5rem"></i>获取定位信息
         </button>
+        <button onclick="onCopyRaw()" class="copy-raw btn btn-outline-primary hidden">
+            <i class="bi bi-clipboard" style="margin-right: .5rem"></i>复制打卡用数据
+        </button>
         <button onclick="onCopy()" class="copy btn btn-outline-secondary hidden">
-            <i class="bi bi-clipboard" style="margin-right: .5rem"></i>复制
+            <i class="bi bi-clipboard" style="margin-right: .5rem"></i>复制可视化数据
         </button>
         <div class="geo-info-container hidden">
             <pre class="geo-info"></pre>
