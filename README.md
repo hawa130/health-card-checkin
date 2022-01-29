@@ -87,10 +87,10 @@ const browser = await puppeteer.launch({
 这里的示例是 macOS 的 Chrome 路径，其他平台按需填写。如：Windows 平台是 chrome.exe 的路径）。这里的浏览器需要是 Chromium 内核的。
 
 ```js
-  const browser = await puppeteer.launch({
-    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-    // 指定 Chrome/Chromium 启动路径
-  });
+const browser = await puppeteer.launch({
+  executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  // 指定 Chrome/Chromium 启动路径
+});
 ```
 
 ### 运行脚本
