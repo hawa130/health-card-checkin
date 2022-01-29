@@ -1,7 +1,7 @@
 # Health Card Checkin
 西安电子科技大学健康卡自动打卡脚本，基于无头 Chromium 浏览器。
 
-基于无头浏览器（无界面浏览器 Puppeteer），相当于模拟真实操作。与直接发送 POST 请求相比，能够更稳定的工作。理论上只要前端不发生变化就能正常工作。
+基于无头浏览器（无界面浏览器 [Puppeteer](https://github.com/puppeteer/puppeteer)），相当于模拟真实操作。与直接发送 POST 请求相比，能够更稳定的工作。理论上只要前端不发生变化就能正常工作。
 
 缺点的话就是在服务器上部署比较麻烦，需要安装很多 Chromium 运行所需的库。
 阿里云函数计算、腾讯云函数等 Serverless 环境部署十分麻烦，所以不推荐在这类服务上部署。
@@ -19,7 +19,7 @@
 
 ### 安装依赖
 
-安装 [puppeteer](https://github.com/puppeteer/puppeteer)。
+安装 puppeteer。
 ```
 npm i puppeteer
 ```
