@@ -44,7 +44,7 @@ const geoData = {
   "info": "SUCCESS"
 };
 ```
-🔼 `geoData` 是位置信息数据。可以在[这个页面](https://geoinfo.hawa130.com/)获取（建议使用手机打开，定位更精准，以免出现奇妙 bug）。复制之后可以直接粘贴，替换掉花括号及其内部的内容。
+🔼 `geoData` 是位置信息数据。可以在[这个页面](https://geoinfo.hawa130.com/)获取（建议使用手机打开，定位更精准，以免出现奇妙 bug）。获取完之后点击「复制可视化数据」。复制之后可以直接粘贴，替换掉花括号及其内部的内容。
 
 **注意**：这个数据一定要保证和上一次手动打卡在一个城市，否则会打卡失败（因为填写时需要选择切换城市，以及原因，脚本可不会自动处理这种情况）。
 
@@ -82,9 +82,9 @@ const browser = await puppeteer.launch({
 
 如果你的 puppeteer 带了浏览器，可以跳过这一步。
 
-修改浏览器启动参数（这里的示例是 macOS 的 Chrome 路径，其他平台按需填写。如：Windows 平台是 chrome.exe 的路径）。
+修改浏览器启动参数，指定 Chrome/Chromium 启动路径。
 
-这里的浏览器需要是 Chromium 内核的。
+这里的示例是 macOS 的 Chrome 路径，其他平台按需填写。如：Windows 平台是 chrome.exe 的路径）。这里的浏览器需要是 Chromium 内核的。
 
 ```js
   const browser = await puppeteer.launch({
