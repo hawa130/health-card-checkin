@@ -15,7 +15,7 @@
 
 以下命令如无特别注明，则均在项目文件夹里执行。
 
----
+**注意**：第一次使用前，请确保在你的所在城市至少手动打卡过一次。
 
 ### 安装依赖
 
@@ -25,9 +25,11 @@ npm i puppeteer
 ```
 如果使用 yarn，可执行 `yarn add puppeteer`。
 
----
+如果你发现安装的 puppeteer 没有附带浏览器（特点是 node_modules 文件夹不到 100 MB），请参考下面的「指定外部浏览器」。
 
 ### 修改脚本配置
+
+使用文本编辑器（如 VS Code、Sublime Text，记事本也算）打开 yqt-check.js。
 
 ```javascript
 const username = '你的学号';
@@ -42,19 +44,30 @@ const geoData = {
   "info": "SUCCESS"
 };
 ```
-🔼 `geoData` 是位置信息数据。可以在[这个页面](https://geoinfo.hawa130.com/)获取。复制之后可以直接粘贴，替换掉花括号及其内部的内容。
+🔼 `geoData` 是位置信息数据。可以在[这个页面](https://geoinfo.hawa130.com/)获取（建议使用手机打开，定位更精准，以免出现奇妙 bug）。复制之后可以直接粘贴，替换掉花括号及其内部的内容。
 
-**注意**：这个数据一定要保证和上一次手动打卡在一个城市，否则会打卡失败（因为填写时需要选择切换城市的原因，该脚本不会自动选择）。
+**注意**：这个数据一定要保证和上一次手动打卡在一个城市，否则会打卡失败（因为填写时需要选择切换城市，以及原因，脚本可不会自动处理这种情况）。
 
 如果更换城市，请手动更换成最新获取的 `geoData` ，并且下一次手动打卡。
 
----
+#### 如何修改启动参数
 
-如果你使用的是 Linux 系统，还需要修改
-```javascript
+在 [yqt-check.js](https://github.com/hawa130/health-card-checkin/blob/master/yqt-check.js) 的第 49 行，有一行
+
+```js
 const browser = await puppeteer.launch();
 ```
-为
+
+下面提到的**修改浏览器启动参数**，改的就是这一行 `launch()` 括号里面的内容。
+
+如果你对 JavaScript 有了解，应该明白括号里面是个 Object。
+
+#### Linux 用户注意事项
+
+如果你使用的不是 Linux 系统，可以跳过这一步。
+
+如果你使用的是 Linux 系统，还需要修改浏览器启动参数
+
 ```javascript
 const browser = await puppeteer.launch({
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -65,14 +78,29 @@ const browser = await puppeteer.launch({
 这样做关闭了 Chromium 的沙箱机制，官方并不推荐这种做法，因为不够安全，但确实是最简单的方法。
 官方也提供了其他的[替代方案](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#setting-up-chrome-linux-sandbox)（更安全）。
 
----
+#### 指定外部浏览器（可选）
+
+如果你的 puppeteer 带了浏览器，可以跳过这一步。
+
+修改浏览器启动参数（这里的示例是 macOS 的 Chrome 路径，其他平台按需填写。如：Windows 平台是 chrome.exe 的路径）。
+
+这里的浏览器需要是 Chromium 内核的。
+
+```js
+  const browser = await puppeteer.launch({
+    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    // 指定 Chrome/Chromium 启动路径
+  });
+```
 
 ### 运行脚本
+
+执行指令，如果输出为 `{ e: 0, m: '操作成功', d: {} }` 或 `{ e: 1, m: '今天已经填报了', d: {} }` 就算成功了。~~如果想要偷懒，设置定时运行即可。~~
 
 ```
 node yqt-check.js
 ```
-如果想要定时在服务器上运行，请用 [crontab](https://www.runoob.com/linux/linux-comm-crontab.html) 。
+如果想要定时在 Linux 服务器上运行，请用 [crontab](https://www.runoob.com/linux/linux-comm-crontab.html) 。
 
 ## 部署注意事项
 个人测试该脚本在完整 Windows 环境下能够正常运行。
