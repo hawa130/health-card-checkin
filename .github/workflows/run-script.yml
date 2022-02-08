@@ -24,4 +24,4 @@ jobs:
     - name: Install Dependencies
       run: npm install
     - name: Run Script
-      run: node yqt-check.js
+      run: node yqt-check.js ${{ secrets.USERNAME }} ${{ secrets.PASSWORD }} '${{ secrets.GEO_INFO }}'
