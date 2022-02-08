@@ -31,7 +31,7 @@
 1. 依次点开「Settings → Secrets → Actions」。
 2. 点击「New repository secret」。
 3. Name 填入 `USERNAME`，Value 填入你的学号。
-4. 点击「Add secret」，此时新建了一个名为 `USERNAME` 的 secret 值，值为你的学号。
+4. 点击「Add secret」，此时你已经成功新建了一个 repository secret，Name 为 `USERNAME`，Value 为你的学号。
 5. 同理，新建一个 repository secret，Name 为 `PASSWORD`，Value 为你的密码。
 6. 同理，新建一个 repository secret，Name 为 `GEO_INFO`，Value 为你的位置信息，请粘贴刚才复制的位置信息。
 
