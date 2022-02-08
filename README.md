@@ -12,7 +12,7 @@
 
 ## 使用前
 
-第一次使用前，请确保在你的所在城市至少手动打卡过一次，并且开启自动打卡后中途不再切换城市。
+第一次使用前，请确保**在你的所在城市至少手动打卡过一次**，并且开启自动打卡后中途不再切换城市。
 
 ## GitHub Actions 部署（推荐）
 
@@ -68,16 +68,15 @@
 
 ## 自行部署
 
-### 部署
 该脚本执行需要 [node.js](https://nodejs.org/) 环境。请先确保个人电脑或服务器上安装了 node.js。
 
 以下命令如无特别注明，则均在**项目文件夹**里执行。
 
-#### 下载 yqt-check.js
+### 下载 yqt-check.js
 
 你也可以克隆仓库。请确保下面的指令均在包含该文件的文件夹（即项目文件夹）内运行。
 
-#### 安装依赖
+### 安装依赖
 
 执行下面的指令，安装 puppeteer。
 ```
@@ -87,7 +86,7 @@ npm i puppeteer
 
 如果你发现安装的 puppeteer 没有附带浏览器（特点是 node_modules 文件夹不到 100 MB），请参考下面的「[指定外部浏览器](#%E6%8C%87%E5%AE%9A%E5%A4%96%E9%83%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%AF%E9%80%89)」。
 
-#### 修改脚本配置
+### 修改脚本配置
 
 使用文本编辑器（如 VS Code、Sublime Text，记事本也算）打开 yqt-check.js。
 
@@ -112,7 +111,7 @@ geoData = {
 
 ---
 
-##### 如何修改启动参数
+#### 如何修改启动参数
 
 在 [yqt-check.js](https://github.com/hawa130/health-card-checkin/blob/master/yqt-check.js) 的第 27 行，有
 
@@ -124,23 +123,22 @@ const browser = await puppeteer.launch();
 
 如果你对 JavaScript 有了解，应该明白括号里面是个 Object。
 
-##### Linux 用户注意事项
+#### 如果 Linux 用户无法启动
 
 如果你使用的不是 Linux 系统，可以跳过这一步。
 
-如果你使用的是 Linux 系统，还需要修改浏览器启动参数
+如果你使用的是 Linux 系统，可能会出现浏览器无法启动的情况，这时候就需要修改浏览器启动参数
 
 ```javascript
 const browser = await puppeteer.launch({
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
 });
 ```
-如果不修改是无法启动浏览器的。
 
 这样做关闭了 Chromium 的沙箱机制，官方并不推荐这种做法，因为不够安全，但确实是最简单的方法。
 官方也提供了其他的[替代方案](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#setting-up-chrome-linux-sandbox)（更安全）。
 
-##### 指定外部浏览器（可选）
+#### 指定外部浏览器（可选）
 
 如果你的 puppeteer 带了浏览器，可以跳过这一步。
 
@@ -155,7 +153,7 @@ const browser = await puppeteer.launch({
 });
 ```
 
-#### 运行脚本
+### 运行脚本
 
 执行指令，如果输出为 `{ e: 0, m: '操作成功', d: {} }` 或 `{ e: 1, m: '今天已经填报了', d: {} }` 就算成功了。~~如果想要偷懒，设置定时运行即可。~~
 
@@ -166,7 +164,7 @@ node yqt-check.js
 
 如果想要定时在 Linux 服务器上运行，请用 [crontab](https://www.runoob.com/linux/linux-comm-crontab.html) 。
 
-## 部署注意事项
+### 部署注意事项
 个人测试该脚本在完整 Windows 环境下能够正常运行。
 
 Linux 系统可能会因为或多或少的库缺失无法运行。启动时如果有缺失的库会报错，以及缺失库的名字。一般缺哪个装哪个就好了。
