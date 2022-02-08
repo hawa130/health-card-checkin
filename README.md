@@ -18,7 +18,7 @@
 
 ### 获取位置信息
 
-在<a href="https://geoinfo.hawa130.com/" target="_blank">这个页面</a>获取位置信息。
+在[这个页面](https://geoinfo.hawa130.com/)获取位置信息。
 
 1. 点击「获取定位信息」。
 2. 若提示需要权限，请允许。
@@ -34,6 +34,20 @@
 4. 点击「Add secret」，此时新建了一个名为 `USERNAME` 的 secret 值，值为你的学号。
 5. 同理，新建一个 repository secret，Name 为 `PASSWORD`，Value 为你的密码。
 6. 同理，新建一个 repository secret，Name 为 `GEO_INFO`，Value 为你的位置信息，请粘贴刚才复制的位置信息。
+
+### 测试 Actions
+
+点击「Actions」，选择「Auto Health Card Check-in」。
+
+点击「Run workflow」，在弹出窗口中点击「Run workflow」。
+
+等待运行结果即可。如果运行成功会显示绿色的✅。
+
+### 高级设置
+
+默认配置是每天早上八点进行打卡。
+
+可以编辑「.github/workflows」里的「run-script.yml」进行自定义设置。
 
 ## 自行部署
 
@@ -63,13 +77,13 @@ npm i puppeteer
 使用文本编辑器（如 VS Code、Sublime Text，记事本也算）打开 yqt-check.js。
 
 ```javascript
-const username = '你的学号';
-const password = '你的密码';
+username = '你的学号';
+password = '你的密码';
 ```
 🔼 这两个字符串分别替换成统一身份认证的学号和密码。注意是字符串格式，带引号。
 
 ```javascript
-const geoData = {
+geoData = {
   "type": "complete",
   // ...
   "info": "SUCCESS"
@@ -85,7 +99,7 @@ const geoData = {
 
 ##### 如何修改启动参数
 
-在 [yqt-check.js](https://github.com/hawa130/health-card-checkin/blob/master/yqt-check.js) 的第 49 行，有一行
+在 [yqt-check.js](https://github.com/hawa130/health-card-checkin/blob/master/yqt-check.js) 的第 27 行，有
 
 ```js
 const browser = await puppeteer.launch();
