@@ -22,7 +22,8 @@ const handle = () =>
   await page.evaluate((geoData) => vm.locatComplete(geoData), geoData);
   await page.evaluate(() => vm.save());
   const res = await page.waitForResponse(saveUrl);
-  console.log(await res.json()['m']);
+  const log = await res.json();
+  console.log(log['m']);
   await browser.close();
 })();
 
