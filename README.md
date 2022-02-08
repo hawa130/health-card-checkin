@@ -37,17 +37,29 @@
 
 ### 测试 Actions
 
-点击「Actions」，选择「Auto Health Card Check-in」。
-
-点击「Run workflow」，在弹出窗口中点击「Run workflow」。
-
-等待运行结果即可。如果运行成功会显示绿色的✅。
+1. 点击「Actions」，选择「Auto Health Card Check-in」。
+2. 点击「Run workflow」，在弹出窗口中点击「Run workflow」。
+3. 等待运行结果即可。如果运行成功会显示绿色的✅。
 
 ### 高级设置
 
 默认配置是每天早上八点进行打卡。
 
-可以编辑「.github/workflows」里的「run-script.yml」进行自定义设置。
+可以编辑「.github/workflows」里的「run-script.yml」进行自定义设置。该配置文件的第 6 行与定时相关，是一个 cron 表达式。
+
+`0 0 * * *` 这五项分别代表：分，时，日，月，星期。
+表示每天 UTC 时间 0:00，即北京时间 8:00 执行此 action。
+北京时间的小时数减去 8 就是 UTC 时间了，如果减出来是个负数，请加上 24，所以注意换算哦。
+
+这里举几个例子：
+`1 23 * * *`：每天 UTC 时间 23:01，即北京时间 7:01 执行。
+`30 10 * * *`：每天北京时间 18:30 执行。
+
+所以看到这里，我相信你应该明白了如何修改打卡时间了。
+
+修改后点击「Start commit」，在弹出窗口中点击「Commit changes」即可保存修改。
+
+更多 cron 表达式的高级用法请看[这里](https://www.runoob.com/linux/linux-comm-crontab.html)。
 
 ## 自行部署
 
