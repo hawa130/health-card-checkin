@@ -10,14 +10,59 @@
 
 ~~不过打卡追求什么效率呢？打上就行了！~~
 
-## 部署
+## GitHub Actions 部署（推荐）
+
+### Fork 本仓库
+
+点击右上角的「Fork」按钮。
+
+### 获取位置信息
+
+在[这个页面](https://geoinfo.hawa130.com/)获取位置信息。
+
+1. 点击「获取定位信息」。
+2. 若提示需要权限，请允许。
+3. 获取成功后，点击「复制打卡用数据」，此时位置信息已存储至剪贴板。
+
+### 设置 Secrets
+
+该步骤设置你的信息。
+
+1. 依次点开「Settings → Secrets → Actions」。
+2. 点击「New repository secret」。
+3. Name 填入 `USERNAME`，Value 填入你的学号。
+4. 点击「Add secret」，此时新建了一个名为 `USERNAME` 的 secret 值，值为你的学号。
+5. 同理，新建一个 repository secret，Name 为 `PASSWORD`，Value 为你的密码。
+6. 同理，新建一个 repository secret，Name 为 `GEO_INFO`，Value 为你的位置信息，请粘贴刚才复制的位置信息。
+
+### 测试 Actions
+
+点击「Actions」，选择「Auto Health Card Check-in」。
+
+点击「Run workflow」，在弹出窗口中点击「Run workflow」。
+
+等待运行结果即可。如果运行成功会显示绿色的✅。
+
+### 高级设置
+
+默认配置是每天早上八点进行打卡。
+
+可以编辑「.github/workflows」里的「run-script.yml」进行自定义设置。
+
+## 自行部署
+
+### 部署
 该脚本执行需要 [node.js](https://nodejs.org/) 环境。请先确保个人电脑或服务器上安装了 node.js。
 
 以下命令如无特别注明，则均在**项目文件夹**里执行。
 
 **注意**：第一次使用前，请确保在你的所在城市至少手动打卡过一次。
 
-### 安装依赖
+#### 下载 yqt-check.js
+
+你也可以克隆仓库。请确保下面的指令均在包含该文件的文件夹（即项目文件夹）内运行。
+
+#### 安装依赖
 
 执行下面的指令，安装 puppeteer。
 ```
@@ -27,18 +72,18 @@ npm i puppeteer
 
 如果你发现安装的 puppeteer 没有附带浏览器（特点是 node_modules 文件夹不到 100 MB），请参考下面的「[指定外部浏览器](#%E6%8C%87%E5%AE%9A%E5%A4%96%E9%83%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%AF%E9%80%89)」。
 
-### 修改脚本配置
+#### 修改脚本配置
 
 使用文本编辑器（如 VS Code、Sublime Text，记事本也算）打开 yqt-check.js。
 
 ```javascript
-const username = '你的学号';
-const password = '你的密码';
+username = '你的学号';
+password = '你的密码';
 ```
 🔼 这两个字符串分别替换成统一身份认证的学号和密码。注意是字符串格式，带引号。
 
 ```javascript
-const geoData = {
+geoData = {
   "type": "complete",
   // ...
   "info": "SUCCESS"
@@ -52,9 +97,9 @@ const geoData = {
 
 ---
 
-#### 如何修改启动参数
+##### 如何修改启动参数
 
-在 [yqt-check.js](https://github.com/hawa130/health-card-checkin/blob/master/yqt-check.js) 的第 49 行，有一行
+在 [yqt-check.js](https://github.com/hawa130/health-card-checkin/blob/master/yqt-check.js) 的第 27 行，有
 
 ```js
 const browser = await puppeteer.launch();
@@ -64,7 +109,7 @@ const browser = await puppeteer.launch();
 
 如果你对 JavaScript 有了解，应该明白括号里面是个 Object。
 
-#### Linux 用户注意事项
+##### Linux 用户注意事项
 
 如果你使用的不是 Linux 系统，可以跳过这一步。
 
@@ -80,7 +125,7 @@ const browser = await puppeteer.launch({
 这样做关闭了 Chromium 的沙箱机制，官方并不推荐这种做法，因为不够安全，但确实是最简单的方法。
 官方也提供了其他的[替代方案](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#setting-up-chrome-linux-sandbox)（更安全）。
 
-#### 指定外部浏览器（可选）
+##### 指定外部浏览器（可选）
 
 如果你的 puppeteer 带了浏览器，可以跳过这一步。
 
@@ -95,13 +140,15 @@ const browser = await puppeteer.launch({
 });
 ```
 
-### 运行脚本
+#### 运行脚本
 
 执行指令，如果输出为 `{ e: 0, m: '操作成功', d: {} }` 或 `{ e: 1, m: '今天已经填报了', d: {} }` 就算成功了。~~如果想要偷懒，设置定时运行即可。~~
 
 ```
 node yqt-check.js
 ```
+如果想要定时在 Windows 电脑上运行，请用「Windows 计划任务」功能。注意打卡时电脑不能睡眠或关机。
+
 如果想要定时在 Linux 服务器上运行，请用 [crontab](https://www.runoob.com/linux/linux-comm-crontab.html) 。
 
 ## 部署注意事项
