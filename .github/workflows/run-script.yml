@@ -1,4 +1,4 @@
-name: XDU Auto Health Card Check-in
+name: Auto Health Card Check-in
 
 on:
   workflow_dispatch:

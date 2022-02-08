@@ -1,9 +1,23 @@
 const puppeteer = require('puppeteer');
 
 const argv = process.argv;
-const username = argv[2];
-const password = argv[3];
-const geoData = JSON.parse(argv[4]);
+let username;
+let password;
+let geoData;
+
+if (argv.length < 3) {
+  username = '你的学号';
+  password = '你的密码';
+  geoData = {
+    "type": "complete",
+    // ...
+    "info": "SUCCESS"
+  };
+} else {
+  username = argv[2];
+  password = argv[3];
+  geoData = JSON.parse(argv[4]);
+}
 
 const url = 'https://xxcapp.xidian.edu.cn/ncov/wap/default/index';
 const saveUrl = 'https://xxcapp.xidian.edu.cn/ncov/wap/default/save';
