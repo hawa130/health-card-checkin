@@ -33,23 +33,51 @@
 该步骤设置你的信息。
 
 1. 依次点开「Settings → Secrets → Actions」。
+
 2. 点击「New repository secret」。
+
 3. Name 填入 `USERNAME`，Value 填入你的学号。
+
 4. 点击「Add secret」，此时你已经成功新建了一个 repository secret，Name 为 `USERNAME`，Value 为你的学号。
+
 5. 同理，新建一个 repository secret，Name 为 `PASSWORD`，Value 为你的密码。
+
 6. 同理，新建一个 repository secret，Name 为 `GEO_INFO`，Value 为你的位置信息，请粘贴刚才复制的位置信息。
+
+经过以上步骤，脚本就配置完成了。
 
 ### 测试 Actions
 
 1. 点击「Actions」，选择「Auto Health Card Check-in」。
 2. 点击「Run workflow」，在弹出窗口中点击「Run workflow」。
 3. 等待运行结果即可。如果运行成功会显示绿色的✅。
+4. 查看更详细的运行结果
+   1. 点击你想看的运行记录「Auto Health Card Check-in」。
+   2. 点击「run」。
+   3. 展开「Run Script」
+   4. 从第 4 行起，就是脚本的输出了。
+   5. 正常的输出应该是「操作成功」或者「今天已经填报了」。如有不正常的输出请先看 FAQs，若仍未解决请提出 Issues。
+
+如果一切顺利，你的 Actions 已经配置好了，它将会在每天北京时间上午 8:00 自动填写健康卡，无需手动干预。
+
+### FAQs
+
+**为什么我运行时，详细的输出里面显示 Timeout？**
+
+1. 检查学号和密码是否填写正确，如果不确定请更新（Update）`USERNAME` 和 `PASSWORD` 两个 secrets 的值。
+2. 确定至少在所在城市[手动打卡](https://xxcapp.xidian.edu.cn/ncov/wap/default/index)过一次。
+3. 检查定位信息是否和上一次手动打卡的信息在同一城市，如果不确定请手动打卡一次，并紧接着更新 `GEO_INFO` 的值（[获取位置信息的网页](https://geoinfo.hawa130.com/)）。
+
 
 ### 高级设置（可选）
 
 默认配置是每天早上八点进行打卡。
 
-可以编辑「.github/workflows」里的「run-script.yml」进行自定义设置。该配置文件的第 6 行与定时相关，是一个 cron 表达式。
+可以编辑 .github/workflows 文件夹里的 [run-script.yml](.github/workflows/run-script.yml) 以进行自定义配置。
+
+打开这个文件，点击右边的「✏️ Edit」按钮可以进行编辑。
+
+该配置文件的第 6 行与定时相关，是一个 cron 表达式。
 
 `0 0 * * *` 这五项分别代表：分，时，日，月，星期。
 表示每天 UTC 时间 0:00，即北京时间 8:00 执行此 action。
@@ -169,7 +197,7 @@ node yqt-check.js
 
 Linux 系统可能会因为或多或少的库缺失无法运行。启动时如果有缺失的库会报错，以及缺失库的名字。一般缺哪个装哪个就好了。
 
-## 关于定位获取网站
+## 关于获取位置信息的网站
 该网站是托管于 GitHub Pages 的纯静态网站，不会收集任何信息。所使用的 API 是从健康卡打卡网页扒的 API，保证获取数据的可用性。
 
 网站源代码也在项目里，即 [index.html](https://github.com/hawa130/health-card-checkin/blob/master/index.html) 。如果网站挂了或者域名到期了，可以在本地部署使用。
