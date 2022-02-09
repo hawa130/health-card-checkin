@@ -33,15 +33,10 @@
 该步骤设置你的信息。
 
 1. 依次点开「Settings → Secrets → Actions」。
-
 2. 点击「New repository secret」。
-
 3. Name 填入 `USERNAME`，Value 填入你的学号。
-
 4. 点击「Add secret」，此时你已经成功新建了一个 repository secret，Name 为 `USERNAME`，Value 为你的学号。
-
 5. 同理，新建一个 repository secret，Name 为 `PASSWORD`，Value 为你的密码。
-
 6. 同理，新建一个 repository secret，Name 为 `GEO_INFO`，Value 为你的位置信息，请粘贴刚才复制的位置信息。
 
 经过以上步骤，脚本就配置完成了。
@@ -73,18 +68,15 @@
 
 默认配置是每天早上八点进行打卡。
 
-可以编辑 .github/workflows 文件夹里的 [run-script.yml](.github/workflows/run-script.yml) 以进行自定义配置。
-
-打开这个文件，点击右边的「✏️ Edit」按钮可以进行编辑。
-
+你可以编辑 .github/workflows 文件夹里的 [run-script.yml](.github/workflows/run-script.yml) 以进行自定义配置。
+打开这个文件，点击右边的「✏️ Edit this file」按钮可以进行编辑。
 该配置文件的第 6 行与定时相关，是一个 cron 表达式。
 
 `0 0 * * *` 这五项分别代表：分，时，日，月，星期。
 表示每天 UTC 时间 0:00，即北京时间 8:00 执行此 action。
-
 北京时间的小时数减去 8 就是 UTC 时间了。如果减出来是个负数，请加上 24，所以注意换算哦。
 
-这里举几个例子
+这里举几个例子：
 - `1 23 * * *`：每天 UTC 时间 23:01，即北京时间 7:01 执行。
 - `30 10 * * *`：每天北京时间 18:30 执行。
 
