@@ -52,7 +52,7 @@
 
 查看更详细的运行结果
 1. 点击你想看的运行记录「Auto Health Card Check-in」。
-<img width="343" alt="image" src="https://user-images.githubusercontent.com/26119430/153642160-37c491e8-c012-45b8-8fa6-173798f2024a.png">
+<img width="943" alt="image" src="https://user-images.githubusercontent.com/26119430/153646492-d01af54b-8f67-46c5-9e2d-2eabd840f3ec.png">
 
 2. 点击「run」。
 <img width="382" alt="image" src="https://user-images.githubusercontent.com/26119430/153642171-06cfdd3b-228a-4aa6-9ded-204f372b6335.png">
