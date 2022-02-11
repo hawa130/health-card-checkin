@@ -67,7 +67,7 @@
 
 ### 高级设置（可选）
 
-默认配置是每天早上八点进行打卡，如果你有需要更改定时的需求，请阅读此板块。
+默认配置是每天早上八点进行打卡，如果你有需要更改定时的需求，请阅读此版块。
 
 你可以编辑 .github/workflows 文件夹里的 [run-script.yml](.github/workflows/run-script.yml) 以进行自定义配置。
 打开这个文件，点击右边的「✏️ Edit this file」按钮可以进行编辑。
@@ -81,7 +81,7 @@
 - `1 23 * * *`：每天 UTC 时间 23:01，即北京时间 7:01 执行。
 - `30 10 * * *`：每天北京时间 18:30 执行。
 
-所以看到这里，我相信你应该明白了如何修改打卡时间了。
+所以看到这里，我相信你应该明白如何修改打卡时间了。
 
 修改后点击「Start commit」，在弹出窗口中点击「Commit changes」即可保存修改。
 
@@ -103,9 +103,7 @@
 <img width="627" alt="image" src="https://user-images.githubusercontent.com/26119430/153641223-d860d15c-2187-4ac9-961c-b046f6016ac5.png">
 
 编辑 .github/workflows 文件夹里的 [run-script.yml](.github/workflows/run-script.yml)。将第 5 行和第 6 行注释掉（在这两行行首插入 `#`）或者删除。
-
 完成操作后，点击「Start commit」，在弹出窗口中点击「Commit changes」即可保存修改。
-
 这样定时就取消了。
 
 ## 自行部署
