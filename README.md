@@ -10,6 +10,8 @@
 
 ~~不过打卡追求什么效率呢？打上就行了！~~
 
+接下来步入正题：如何使用该脚本呢？这里提供了两种部署方案：「GitHub Actions 部署」和「自行部署」。前者部署方法简单，也不需要服务器或者不关机的电脑，所以个人更推荐前者。
+
 ## 使用前
 
 第一次使用前，请确保**在你的所在城市至少手动打卡过一次**，并且开启自动打卡后中途不再切换城市。
@@ -51,22 +53,13 @@
    2. 点击「run」。
    3. 展开「Run Script」
    4. 从第 4 行起，就是脚本的输出了。
-   5. 正常的输出应该是「操作成功」或者「今天已经填报了」。如有不正常的输出请先看 FAQs，若仍未解决请提出 Issues。
+   5. 正常的输出应该是 `操作成功` 或者 `今天已经填报了`。如有不正常的输出请先看 FAQs，若仍未解决请提出 Issues。
 
-如果一切顺利，你的 Actions 已经配置好了，它将会在每天北京时间上午 8:00 自动填写健康卡，无需手动干预。
-
-### FAQs
-
-**为什么我运行时，详细的输出里面显示 Timeout？**
-
-1. 检查学号和密码是否填写正确，如果不确定请更新（Update）`USERNAME` 和 `PASSWORD` 两个 secrets 的值。
-2. 确定至少在所在城市[手动打卡](https://xxcapp.xidian.edu.cn/ncov/wap/default/index)过一次。
-3. 检查定位信息是否和上一次手动打卡的信息在同一城市，如果不确定请手动打卡一次，并紧接着更新 `GEO_INFO` 的值（[获取位置信息的网页](https://geoinfo.hawa130.com/)）。
-
+如果一切顺利，到这里你的 Actions 已经配置好了，它将会在每天北京时间上午 8:00 自动填写健康卡，无需手动干预。
 
 ### 高级设置（可选）
 
-默认配置是每天早上八点进行打卡。
+默认配置是每天早上八点进行打卡，如果你有需要更改定时的需求，请阅读此板块。
 
 你可以编辑 .github/workflows 文件夹里的 [run-script.yml](.github/workflows/run-script.yml) 以进行自定义配置。
 打开这个文件，点击右边的「✏️ Edit this file」按钮可以进行编辑。
@@ -86,7 +79,25 @@
 
 更多 cron 表达式的高级用法请看[这里](https://www.runoob.com/linux/linux-comm-crontab.html)。
 
+### FAQs
+
+**为什么我运行时，详细的输出里面显示 Timeout？**
+
+1. 检查学号和密码是否填写正确，如果不确定请更新（Update）`USERNAME` 和 `PASSWORD` 两个 secrets 的值。
+2. 确定至少在所在城市[手动打卡](https://xxcapp.xidian.edu.cn/ncov/wap/default/index)过一次。
+3. 检查定位信息是否和上一次手动打卡的信息在同一城市，如果不确定请手动打卡一次，并紧接着更新 `GEO_INFO` 的值（[获取位置信息的网页](https://geoinfo.hawa130.com/)）。
+
+**如何停用脚本？**
+
+编辑 .github/workflows 文件夹里的 [run-script.yml](.github/workflows/run-script.yml)。将第 5 行和第 6 行注释掉（在这两行行首插入 `#`）或者删除。
+
+完成操作后，点击「Start commit」，在弹出窗口中点击「Commit changes」即可保存修改。
+
+这样定时就取消了。
+
 ## 自行部署
+
+该部署方法适合进阶玩家（需要具备命令行使用基础以及安装 npm 包的能力）。~~也适合闲的没事干喜欢折腾的~~
 
 该脚本执行需要 [node.js](https://nodejs.org/) 环境。请先确保个人电脑或服务器上安装了 node.js。
 
@@ -175,7 +186,7 @@ const browser = await puppeteer.launch({
 
 ### 运行脚本
 
-执行指令，如果输出为 `{ e: 0, m: '操作成功', d: {} }` 或 `{ e: 1, m: '今天已经填报了', d: {} }` 就算成功了。~~如果想要偷懒，设置定时运行即可。~~
+执行指令，如果输出为 `操作成功` 或 `今天已经填报了` 就算成功了。~~如果想要偷懒，设置定时运行即可。~~
 
 ```
 node yqt-check.js
@@ -193,6 +204,15 @@ Linux 系统可能会因为或多或少的库缺失无法运行。启动时如�
 该网站是托管于 GitHub Pages 的纯静态网站，不会收集任何信息。所使用的 API 是从健康卡打卡网页扒的 API，保证获取数据的可用性。
 
 网站源代码也在项目里，即 [index.html](https://github.com/hawa130/health-card-checkin/blob/master/index.html) 。如果网站挂了或者域名到期了，可以在本地部署使用。
+
+## 用户协议
+
+1. 你可以自由地分发、修改该脚本，不受任何约束，也不用署名。
+2. 该脚本为免费提供，无任何收费服务。
+3. 如果身体有任何疑似新冠肺炎症状的情况，请立即停止使用该脚本，并根据实际情况手动填报。
+4. 作者不因使用脚本出现而的任何意外负责。
+
+如果你使用本脚本，将默认视为你同意上述协议。
 
 ## 附录
 [puppeteer 常见问题](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#troubleshooting)
