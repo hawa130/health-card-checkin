@@ -1,16 +1,13 @@
 # Health Card Checkin
-西安电子科技大学健康卡自动打卡脚本，基于无头 Chromium 浏览器。
+西安电子科技大学健康卡自动打卡脚本，基于 Puppeteer，一种无头（无界面） Chromium 浏览器。
 
-基于无头浏览器（无界面浏览器 [Puppeteer](https://github.com/puppeteer/puppeteer)），相当于模拟真实操作。与直接发送 POST 请求相比，能够更稳定的工作。理论上只要前端不发生变化就能正常工作。
+因为是基于真实的浏览器，所以相当于模拟真实操作。与直接发送 POST 请求相比，能够更稳定的工作，即使网页提交表单新增或减少字段，它也都能对付，有较强的自适应能力。理论上只要前端不发生大变化就能正常工作。
 
-缺点的话就是在服务器上部署比较麻烦，需要安装很多 Chromium 运行所需的库。
 阿里云函数计算、腾讯云函数等 Serverless 环境部署十分麻烦，所以不推荐在这类服务上部署。
 
-因为是启动了真正的浏览器，所以运行起来会相对慢一些。
+因为是启动了真正的浏览器，所以运行起来会相对慢一些。~~不过打卡追求什么效率呢？打上就行了！~~
 
-~~不过打卡追求什么效率呢？打上就行了！~~
-
-接下来步入正题：如何使用该脚本呢？这里提供了两种部署方案：「GitHub Actions 部署」和「自行部署」。前者部署方法简单，也不需要服务器或者不关机的电脑，所以个人更推荐前者。
+接下来步入正题：如何使用该脚本呢？这里提供了两种部署方案：「[GitHub Actions 部署](#github-actions-部署推荐)」和「[自行部署](#自行部署)」。前者部署方法简单，也不需要服务器或者不关机的电脑，所以个人更推荐前者。
 
 ## 使用前
 
@@ -34,28 +31,39 @@
 
 该步骤设置你的信息。
 
-1. 依次点开「Settings → Secrets → Actions」。
-2. 点击「New repository secret」。
-3. Name 填入 `USERNAME`，Value 填入你的学号。
-4. 点击「Add secret」，此时你已经成功新建了一个 repository secret，Name 为 `USERNAME`，Value 为你的学号。
-5. 同理，新建一个 repository secret，Name 为 `PASSWORD`，Value 为你的密码。
-6. 同理，新建一个 repository secret，Name 为 `GEO_INFO`，Value 为你的位置信息，请粘贴刚才复制的位置信息。
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26119430/153638517-a0ebf033-dbbb-4b8a-b181-09c4d0955335.png">
+
+1. 如图所示：依次点开「Settings → Secrets → Actions」，点击「New repository secret」。
+2. Name 填入 `USERNAME`，Value 填入你的学号。
+3. 点击「Add secret」，此时你已经成功新建了一个 repository secret，Name 为 `USERNAME`，Value 为你的学号。
+4. 同理，新建一个 repository secret，Name 为 `PASSWORD`，Value 为你的密码。
+5. 同理，新建一个 repository secret，Name 为 `GEO_INFO`，Value 为你的位置信息，请粘贴刚才复制的位置信息。
 
 经过以上步骤，脚本就配置完成了。
 
 ### 测试 Actions
 
+手动运行一次，如下图所示
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26119430/153639130-7dcbc056-e19d-4eb4-96ee-5b32c4dc7eb6.png">
+
 1. 点击「Actions」，选择「Auto Health Card Check-in」。
 2. 点击「Run workflow」，在弹出窗口中点击「Run workflow」。
-3. 等待运行结果即可。如果运行成功会显示绿色的✅。
-4. 查看更详细的运行结果
-   1. 点击你想看的运行记录「Auto Health Card Check-in」。
-   2. 点击「run」。
-   3. 展开「Run Script」
-   4. 从第 4 行起，就是脚本的输出了。
-   5. 正常的输出应该是 `操作成功` 或者 `今天已经填报了`。如有不正常的输出请先看 FAQs，若仍未解决请提出 Issues。
+3. 等待运行结果即可。如果运行成功会显示绿色的 ✅。
 
-如果一切顺利，到这里你的 Actions 已经配置好了，它将会在每天北京时间上午 8:00 自动填写健康卡，无需手动干预。
+查看更详细的运行结果
+1. 点击你想看的运行记录「Auto Health Card Check-in」。
+<img width="343" alt="image" src="https://user-images.githubusercontent.com/26119430/153642160-37c491e8-c012-45b8-8fa6-173798f2024a.png">
+
+2. 点击「run」。
+<img width="382" alt="image" src="https://user-images.githubusercontent.com/26119430/153642171-06cfdd3b-228a-4aa6-9ded-204f372b6335.png">
+
+3. 展开「Run Script」。
+<img width="1035" alt="image" src="https://user-images.githubusercontent.com/26119430/153642189-ed395901-893d-4fd0-b4a1-898a01d37647.png">
+
+4. 从第 4 行（行号为 4 的行）起，就是脚本的输出了。
+5. 正常的输出应该是 `操作成功` 或者 `今天已经填报了`。如有不正常的输出请先看 [FAQs](#faqs)，若仍未解决请提出 Issues。
+
+如果一切顺利，到这里你的 Actions 已经配置好了，它将会在每天北京时间上午 8:00 自动填写健康卡，无需手动干预。如果打卡失败了，GitHub 会发送邮件通知。
 
 ### 高级设置（可选）
 
@@ -83,11 +91,16 @@
 
 **为什么我运行时，详细的输出里面显示 Timeout？**
 
+<img width="1029" alt="image" src="https://user-images.githubusercontent.com/26119430/153640487-8f31aeb7-f1db-4f50-9e5d-879196e8c5e6.png">
+
 1. 检查学号和密码是否填写正确，如果不确定请更新（Update）`USERNAME` 和 `PASSWORD` 两个 secrets 的值。
 2. 确定至少在所在城市[手动打卡](https://xxcapp.xidian.edu.cn/ncov/wap/default/index)过一次。
 3. 检查定位信息是否和上一次手动打卡的信息在同一城市，如果不确定请手动打卡一次，并紧接着更新 `GEO_INFO` 的值（[获取位置信息的网页](https://geoinfo.hawa130.com/)）。
+4. 检查是否在打卡时间范围内，如果不在打卡时间范围内则无法提交。
 
 **如何停用脚本？**
+
+<img width="627" alt="image" src="https://user-images.githubusercontent.com/26119430/153641223-d860d15c-2187-4ac9-961c-b046f6016ac5.png">
 
 编辑 .github/workflows 文件夹里的 [run-script.yml](.github/workflows/run-script.yml)。将第 5 行和第 6 行注释掉（在这两行行首插入 `#`）或者删除。
 
@@ -115,7 +128,7 @@ npm i puppeteer
 ```
 如果使用 yarn，可执行 `yarn add puppeteer`。
 
-如果你发现安装的 puppeteer 没有附带浏览器（特点是 node_modules 文件夹不到 100 MB），请参考下面的「[指定外部浏览器](#%E6%8C%87%E5%AE%9A%E5%A4%96%E9%83%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%AF%E9%80%89)」。
+如果你发现安装的 puppeteer 没有附带浏览器（特点是 node_modules 文件夹不到 100 MB），请参考下面的「[指定外部浏览器](#指定外部浏览器可选)」。
 
 ### 修改脚本配置
 
@@ -207,10 +220,10 @@ Linux 系统可能会因为或多或少的库缺失无法运行。启动时如�
 
 ## 用户协议
 
-1. 你可以自由地分发、修改该脚本，不受任何约束，也不用署名。
-2. 该脚本为免费提供，无任何收费服务。
-3. 如果身体有任何疑似新冠肺炎症状的情况，请立即停止使用该脚本，并根据实际情况手动填报。
-4. 作者不为因使用脚本出现的任何意外状况而负责。
+1. 你可以自由地分发、修改该脚本，不受任何约束，也不用署名。（就把它当成公共领域对待就行）
+2. 该脚本为免费提供，无任何收费服务。~~（这简陋脚本总不会有人倒卖吧）~~
+3. 如果身体有任何疑似新冠肺炎症状的情况，请立即停止使用该脚本，并根据实际情况手动填报。（一定要如实填报哦）
+4. 若发生因使用本脚本而导致的任何意外，作者概不负责。~~（用个脚本能发生什么意外呢，我想不到，只是个免责声明吧）~~
 
 如果你使用本脚本，将默认视为你同意上述协议。
 
