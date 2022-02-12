@@ -89,7 +89,7 @@
 
 ### FAQs
 
-**为什么我运行时，详细的输出里面显示 Timeout？**
+#### 为什么我运行时，详细的输出里面显示 Timeout？
 
 <img width="1029" alt="image" src="https://user-images.githubusercontent.com/26119430/153640487-8f31aeb7-f1db-4f50-9e5d-879196e8c5e6.png">
 
@@ -98,13 +98,21 @@
 3. 检查定位信息是否和上一次手动打卡的信息在同一城市，如果不确定请手动打卡一次，并紧接着更新 `GEO_INFO` 的值（[获取位置信息的网页](https://geoinfo.hawa130.com/)）。
 4. 检查是否在打卡时间范围内，如果不在打卡时间范围内则无法提交。
 
-**如何停用脚本？**
+#### 如何停用脚本？
+
+**方法 1**
 
 <img width="627" alt="image" src="https://user-images.githubusercontent.com/26119430/153641223-d860d15c-2187-4ac9-961c-b046f6016ac5.png">
 
 编辑 .github/workflows 文件夹里的 [run-script.yml](.github/workflows/run-script.yml)。将第 5 行和第 6 行注释掉（在这两行行首插入 `#`）或者删除。
 完成操作后，点击「Start commit」，在弹出窗口中点击「Commit changes」即可保存修改。
 这样定时就取消了。
+
+**方法 2**
+
+<img width="1439" alt="image" src="https://user-images.githubusercontent.com/26119430/153702059-26a1353b-d133-4933-92b8-547fb12c661c.png">
+
+点开「Settings → Actions → General」，选择「Disable Actions」，点击 Save 后即可禁用 Actions。
 
 ## 自行部署
 
