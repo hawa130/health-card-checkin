@@ -54,11 +54,10 @@
 ⬇️ 手动运行一次。
 <img width="941" alt="image" src="https://user-images.githubusercontent.com/26119430/153704060-09e9536a-d24c-40b0-876c-303f7e46b899.png">
 
+等待运行结果即可。如果运行成功会显示绿色的 ✅。
+
 ⬇️ 如果想以后再手动运行可以这样。
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26119430/153639130-7dcbc056-e19d-4eb4-96ee-5b32c4dc7eb6.png">
-1. 点击「Actions」，选择「Auto Health Card Check-in」。
-2. 点击「Run workflow」，在弹出窗口中点击「Run workflow」。
-3. 等待运行结果即可。如果运行成功会显示绿色的 ✅。
 
 **查看更详细的运行结果**
 1. 点击你想看的运行记录「Auto Health Card Check-in」。
