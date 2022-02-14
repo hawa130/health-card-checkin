@@ -25,20 +25,25 @@ const saveUrl = 'https://xxcapp.xidian.edu.cn/ncov/wap/default/save';
 const handle = () =>
 (async () => {
   const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto(url);
-  await page.evaluate((username, password) => {
-    vm.username = username;
-    vm.password = password;
-    vm.login();
-  }, username, password);
-  await page.waitForNavigation({ waitUntil: "domcontentloaded" });
-  await page.evaluate((geoData) => vm.locatComplete(geoData), geoData);
-  await page.evaluate(() => vm.save());
-  const res = await page.waitForResponse(saveUrl);
-  const log = await res.json();
-  console.log(log['m']);
-  await browser.close();
+  try {
+    const page = await browser.newPage();
+    await page.goto(url);
+    await page.evaluate((username, password) => {
+      vm.username = username;
+      vm.password = password;
+      vm.login();
+    }, username, password);
+    await page.waitForNavigation({ waitUntil: "domcontentloaded" });
+    await page.evaluate((geoData) => vm.locatComplete(geoData), geoData);
+    await page.evaluate(() => vm.save());
+    const res = await page.waitForResponse(saveUrl);
+    const log = await res.json();
+    console.log(log['m']);
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await browser.close();
+  }
 })();
 
 handle();
